@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GustazzkSensi - Gerador de Sensi</title>
+    <title>Gustazzk - O Rei da Sensibilidade</title>
     <style>
         * {
             margin: 0;
@@ -13,261 +13,267 @@
         }
 
         body {
-            background-color: #121212;
-            color: #ffffff;
+            /* Fundo Animado com RGB Azul e Roxo */
+            background: linear-gradient(125deg, #0d001a, #001133, #1a0033, #002244);
+            background-size: 400% 400%;
+            animation: rgbBg 10s ease infinite;
+            color: #fff;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
+        }
+
+        @keyframes rgbBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
-            background-color: #1e1e1e;
-            border-radius: 15px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
             width: 100%;
             max-width: 400px;
-            padding: 25px;
             text-align: center;
-            border: 1px solid #333;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.3), 0 0 30px rgba(0, 191, 255, 0.2);
         }
 
-        /* Perfil estilo Facebook */
-        .profile-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .profile-pic-wrapper {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
-        }
-
-        .profile-pic {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #1877f2; /* Azul do Facebook */
-        }
-
-        .fb-badge {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            background-color: #1877f2;
-            color: white;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #1e1e1e;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            color: #1877f2;
+        /* Cabeçalho pedido */
+        .header-title {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
             margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
-        .subtitle {
-            font-size: 0.9rem;
-            color: #aaa;
+        .header-subtitle {
+            font-size: 16px;
+            color: #d8b4fe;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-shadow: 0 0 8px #8a2be2;
+        }
+
+        /* Formulários e Inputs */
+        .input-group {
             margin-bottom: 20px;
-        }
-
-        /* Formulário e Opções */
-        .form-group {
-            margin-bottom: 15px;
             text-align: left;
         }
 
         label {
             display: block;
             margin-bottom: 8px;
-            font-size: 0.9rem;
-            color: #ddd;
+            color: #a3e635;
+            font-size: 14px;
             font-weight: 600;
         }
 
-        select {
+        input[type="password"], select {
             width: 100%;
             padding: 12px;
-            background-color: #2d2d2d;
-            border: 1px solid #444;
-            border-radius: 8px;
-            color: white;
-            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #8a2be2;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
             outline: none;
-            transition: border 0.3s;
+            transition: 0.3s;
         }
 
-        select:focus {
-            border-color: #1877f2;
+        input[type="password"]:focus, select:focus {
+            border-color: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
-        /* Botão */
-        .btn-gerar {
+        button {
             width: 100%;
             padding: 14px;
-            background-color: #1877f2;
-            color: white;
+            background: linear-gradient(90deg, #8a2be2, #00ffff);
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 10px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
-        .btn-gerar:hover {
-            background-color: #1565c0;
+        button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
         }
 
-        /* Resultado */
+        /* Telas */
+        .screen {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        /* Resultado da Sensi */
         .result-box {
             margin-top: 25px;
-            background-color: #252525;
-            border-radius: 10px;
             padding: 15px;
-            display: none;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            border-left: 4px solid #00ffff;
             text-align: left;
-            border-left: 5px solid #1877f2;
-            animation: fadeIn 0.5s ease-in-out;
+            display: none;
+            animation: fadeIn 0.5s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .result-title {
-            font-weight: bold;
-            color: #1877f2;
-            margin-bottom: 10px;
-            text-align: center;
-            border-bottom: 1px solid #333;
-            padding-bottom: 5px;
-        }
-
         .result-item {
-            display: flex;
-            justify-content: space-between;
             margin-bottom: 8px;
-            font-size: 0.95rem;
+            font-size: 16px;
         }
 
-        .result-item span:last-child {
+        .result-item span {
+            color: #00ffff;
             font-weight: bold;
-            color: #00ffcc;
+        }
+
+        .error-msg {
+            color: #ff4444;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="profile-container">
-            <div class="profile-pic-wrapper">
-                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80" alt="Foto de Perfil" class="profile-pic">
-                <div class="fb-badge">✓</div>
+        <div class="header-title">gustazzk</div>
+        <div class="header-subtitle">O rei das sensibilidade🚀</div>
+
+        <div id="login-screen" class="screen active">
+            <div class="input-group">
+                <label for="password">Digite a senha para acessar:</label>
+                <input type="password" id="password" placeholder="Sua senha aqui...">
+                <div id="error-message" class="error-msg">Senha incorreta! Tente novamente.</div>
             </div>
-            <h1>gustazzksensi</h1>
-            <p class="subtitle">O brabo das sensibilidades no FF</p>
+            <button onclick="verificarSenha()">Entrar no Painel</button>
         </div>
 
-        <div class="form-group">
-            <label for="tipoSensi">Escolha o tipo de sensibilidade:</label>
-            <select id="tipoSensi">
-                <option value="alta">Sensi Alta 🚀</option>
-                <option value="media">Sensi Média 🎯</option>
-                <option value="baixa">Sensi Baixa 🛡️</option>
-            </select>
-        </div>
+        <div id="main-screen" class="screen">
+            <div class="input-group">
+                <label for="tipo-sensi">Escolha o Tipo de Sensibilidade:</label>
+                <select id="tipo-sensi">
+                    <option value="alta">Alta (Foco em InstaPlayer)</option>
+                    <option value="media">Média (Equilibrada/Campeonato)</option>
+                    <option value="baixa">Baixa (Foco em % de Capa/Armas de um tiro)</option>
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label for="comDpi">Deseja incluir DPI?</label>
-            <select id="comDpi">
-                <option value="sim">Sim, com DPI</option>
-                <option value="nao">Não, sem DPI (Padrão)</option>
-            </select>
-        </div>
+            <div class="input-group">
+                <label for="com-dpi">Configuração de DPI:</label>
+                <select id="com-dpi">
+                    <option value="sim">Com DPI (Celular leve)</option>
+                    <option value="nao">Sem DPI (Padrão do Jogo)</option>
+                </select>
+            </div>
 
-        <button class="btn-gerar" onclick="gerarSensibilidade()">GERAR SENSIBILIDADE</button>
+            <button onclick="gerarSensibilidade()">Gerar Melhor Sensi 🔥</button>
 
-        <div class="result-box" id="resultado">
-            <div class="result-title">⚙️ SENSI GERADA COM SUCESSO</div>
-            <div class="result-item"><span>Geral:</span> <span id="resGeral">0</span></div>
-            <div class="result-item"><span>Ponto Vermelho (Red Dot):</span> <span id="resRedDot">0</span></div>
-            <div class="result-item"><span>Mira 2x:</span> <span id="res2x">0</span></div>
-            <div class="result-item"><span>Mira 4x:</span> <span id="res4x">0</span></div>
-            <div class="result-item"><span>Mira AWM:</span> <span id="resAwm">0</span></div>
-            <div class="result-item" id="divDpi"><span>DPI Recomendada:</span> <span id="resDpi">Padrão</span></div>
+            <div id="result" class="result-box">
+                <div class="result-item">Geral: <span id="res-geral">0</span>/200</div>
+                <div class="result-item">Ponto Vermelho: <span id="res-red">0</span>/200</div>
+                <div class="result-item">Mira 2x: <span id="res-2x">0</span>/200</div>
+                <div class="result-item">Mira 4x: <span id="res-4x">0</span>/200</div>
+                <div class="result-item">AWM: <span id="res-awm">0</span>/200</div>
+                <div class="result-item" id="dpi-row">DPI recomendada: <span id="res-dpi">0</span></div>
+                <div class="result-item" style="color: #a3e635; margin-top: 10px; font-size: 13px; text-align: center;">
+                    ⚡ Sensi calibrada pelo Rei Gustazzk!
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        function gerouNumero(min, max) {
+        // Função para validar a senha
+        function verificarSenha() {
+            const senhaInput = document.getElementById('password').value;
+            const erroMsg = document.getElementById('error-message');
+            
+            if (senhaInput === 'gustazzk') {
+                document.getElementById('login-screen').classList.remove('active');
+                document.getElementById('main-screen').classList.add('active');
+            } else {
+                erroMsg.style.display = 'block';
+            }
+        }
+
+        // Função que gera números aleatórios
+        function gerarRandom(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
         function gerarSensibilidade() {
-            const tipoSensi = document.getElementById('tipoSensi').value;
-            const comDpi = document.getElementById('comDpi').value;
+            const tipoSensi = document.getElementById('tipo-sensi').value;
+            const comDpi = document.getElementById('com-dpi').value;
             
-            let geral, redDot, m2x, m4x, awm, dpi;
+            let geral, red, m2x, m4x, awm, dpi;
 
-            // Lógica para os tipos de sensibilidade
+            // Lógica ajustada para a escala de 0 a 200
             if (tipoSensi === 'alta') {
-                geral = gerouNumero(95, 100);
-                redDot = gerouNumero(92, 100);
-                m2x = gerouNumero(95, 100);
-                m4x = gerouNumero(90, 100);
-                awm = gerouNumero(50, 85);
-                dpi = gerouNumero(600, 960);
+                geral = gerarRandom(180, 200);
+                red = gerarRandom(175, 198);
+                m2x = gerarRandom(180, 200);
+                m4x = gerarRandom(170, 195);
             } else if (tipoSensi === 'media') {
-                geral = gerouNumero(85, 94);
-                redDot = gerouNumero(80, 91);
-                m2x = gerouNumero(85, 94);
-                m4x = gerouNumero(80, 89);
-                awm = gerouNumero(30, 49);
-                dpi = gerouNumero(480, 595);
-            } else { // baixa
-                geral = gerouNumero(70, 84);
-                redDot = gerouNumero(70, 79);
-                m2x = gerouNumero(75, 84);
-                m4x = gerouNumero(70, 79);
-                awm = gerouNumero(15, 29);
-                dpi = gerouNumero(410, 475);
+                geral = gerarRandom(140, 179);
+                red = gerarRandom(130, 174);
+                m2x = gerarRandom(140, 179);
+                m4x = gerarRandom(135, 169);
+            } else { // Baixa
+                geral = gerarRandom(80, 139);
+                red = gerarRandom(75, 129);
+                m2x = gerarRandom(80, 139);
+                m4x = gerarRandom(70, 134);
             }
 
-            // Aplicar os valores na tela
-            document.getElementById('resGeral').innerText = geral;
-            document.getElementById('resRedDot').innerText = redDot;
-            document.getElementById('res2x').innerText = m2x;
-            document.getElementById('res4x').innerText = m4x;
-            document.getElementById('resAwm').innerText = awm;
+            awm = gerarRandom(50, 120);
 
-            // Lógica de mostrar ou não a DPI
-            const divDpi = document.getElementById('divDpi');
+            // Exibir os dados na tela
+            document.getElementById('res-geral').innerText = geral;
+            document.getElementById('res-red').innerText = red;
+            document.getElementById('res-2x').innerText = m2x;
+            document.getElementById('res-4x').innerText = m4x;
+            document.getElementById('res-awm').innerText = awm;
+
+            // Lógica da DPI
+            const dpiRow = document.getElementById('dpi-row');
             if (comDpi === 'sim') {
-                divDpi.style.display = 'flex';
-                document.getElementById('resDpi').innerText = dpi;
+                if (tipoSensi === 'alta') dpi = gerarRandom(720, 960);
+                else if (tipoSensi === 'media') dpi = gerarRandom(550, 710);
+                else dpi = gerarRandom(420, 540);
+                
+                document.getElementById('res-dpi').innerText = dpi;
+                dpiRow.style.display = 'block';
             } else {
-                divDpi.style.display = 'none';
+                dpiRow.style.display = 'none';
             }
 
-            // Mostrar a caixinha de resultado com animação
-            document.getElementById('resultado').style.display = 'block';
+            // Mostrar o box de resultado com animação
+            document.getElementById('result').style.display = 'block';
         }
     </script>
 </body>
