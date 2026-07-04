@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GustazzkSensi - Gerador de Sensi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        /* Perfil estilo Facebook */
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .profile-pic-wrapper {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1877f2; /* Azul do Facebook */
+        }
+
+        .fb-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background-color: #1877f2;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #1e1e1e;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #1877f2;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+
+        /* Formulário e Opções */
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #ddd;
+            font-weight: 600;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            background-color: #2d2d2d;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        select:focus {
+            border-color: #1877f2;
+        }
+
+        /* Botão */
+        .btn-gerar {
+            width: 100%;
+            padding: 14px;
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-gerar:hover {
+            background-color: #1565c0;
+        }
+
+        /* Resultado */
+        .result-box {
+            margin-top: 25px;
+            background-color: #252525;
+            border-radius: 10px;
+            padding: 15px;
+            display: none;
+            text-align: left;
+            border-left: 5px solid #1877f2;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-title {
+            font-weight: bold;
+            color: #1877f2;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .result-item span:last-child {
+            font-weight: bold;
+            color: #00ffcc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile-pic-wrapper">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80" alt="Foto de Perfil" class="profile-pic">
+                <div class="fb-badge">✓</div>
+            </div>
+            <h1>gustazzksensi</h1>
+            <p class="subtitle">O brabo das sensibilidades no FF</p>
+        </div>
+
+        <div class="form-group">
+            <label for="tipoSensi">Escolha o tipo de sensibilidade:</label>
+            <select id="tipoSensi">
+                <option value="alta">Sensi Alta 🚀</option>
+                <option value="media">Sensi Média 🎯</option>
+                <option value="baixa">Sensi Baixa 🛡️</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="comDpi">Deseja incluir DPI?</label>
+            <select id="comDpi">
+                <option value="sim">Sim, com DPI</option>
+                <option value="nao">Não, sem DPI (Padrão)</option>
+            </select>
+        </div>
+
+        <button class="btn-gerar" onclick="gerarSensibilidade()">GERAR SENSIBILIDADE</button>
+
+        <div class="result-box" id="resultado">
+            <div class="result-title">⚙️ SENSI GERADA COM SUCESSO</div>
+            <div class="result-item"><span>Geral:</span> <span id="resGeral">0</span></div>
+            <div class="result-item"><span>Ponto Vermelho (Red Dot):</span> <span id="resRedDot">0</span></div>
+            <div class="result-item"><span>Mira 2x:</span> <span id="res2x">0</span></div>
+            <div class="result-item"><span>Mira 4x:</span> <span id="res4x">0</span></div>
+            <div class="result-item"><span>Mira AWM:</span> <span id="resAwm">0</span></div>
+            <div class="result-item" id="divDpi"><span>DPI Recomendada:</span> <span id="resDpi">Padrão</span></div>
+        </div>
+    </div>
+
+    <script>
+        function gerouNumero(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function gerarSensibilidade() {
+            const tipoSensi = document.getElementById('tipoSensi').value;
+            const comDpi = document.getElementById('comDpi').value;
+            
+            let geral, redDot, m2x, m4x, awm, dpi;
+
+            // Lógica para os tipos de sensibilidade
+            if (tipoSensi === 'alta') {
+                geral = gerouNumero(95, 100);
+                redDot = gerouNumero(92, 100);
+                m2x = gerouNumero(95, 100);
+                m4x = gerouNumero(90, 100);
+                awm = gerouNumero(50, 85);
+                dpi = gerouNumero(600, 960);
+            } else if (tipoSensi === 'media') {
+                geral = gerouNumero(85, 94);
+                redDot = gerouNumero(80, 91);
+                m2x = gerouNumero(85, 94);
+                m4x = gerouNumero(80, 89);
+                awm = gerouNumero(30, 49);
+                dpi = gerouNumero(480, 595);
+            } else { // baixa
+                geral = gerouNumero(70, 84);
+                redDot = gerouNumero(70, 79);
+                m2x = gerouNumero(75, 84);
+                m4x = gerouNumero(70, 79);
+                awm = gerouNumero(15, 29);
+                dpi = gerouNumero(410, 475);
+            }
+
+            // Aplicar os valores na tela
+            document.getElementById('resGeral').innerText = geral;
+            document.getElementById('resRedDot').innerText = redDot;
+            document.getElementById('res2x').innerText = m2x;
+            document.getElementById('res4x').innerText = m4x;
+            document.getElementById('resAwm').innerText = awm;
+
+            // Lógica de mostrar ou não a DPI
+            const divDpi = document.getElementById('divDpi');
+            if (comDpi === 'sim') {
+                divDpi.style.display = 'flex';
+                document.getElementById('resDpi').innerText = dpi;
+            } else {
+                divDpi.style.display = 'none';
+            }
+
+            // Mostrar a caixinha de resultado com animação
+            document.getElementById('resultado').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
