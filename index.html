@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gustazzk - O Rei da Sensibilidade</title>
+    <title>Interface Menu Interativo - Gustazzk Sensi</title>
     <style>
         * {
             margin: 0;
@@ -13,268 +13,467 @@
         }
 
         body {
-            /* Fundo Animado com RGB Azul e Roxo */
-            background: linear-gradient(125deg, #0d001a, #001133, #1a0033, #002244);
-            background-size: 400% 400%;
-            animation: rgbBg 10s ease infinite;
-            color: #fff;
-            min-height: 100vh;
+            background-color: #0b0214;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
+            color: #fff;
             padding: 20px;
-            overflow-x: hidden;
         }
 
-        @keyframes rgbBg {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 20px;
+        /* Container Principal com a borda neon roxa */
+        .menu-container {
             width: 100%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 0 30px rgba(138, 43, 226, 0.3), 0 0 30px rgba(0, 191, 255, 0.2);
+            max-width: 500px;
+            background-color: #05010a;
+            border: 2px solid #8a2be2;
+            border-radius: 16px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
         }
 
-        /* Cabeçalho pedido */
-        .header-title {
-            font-size: 28px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: #00ffff;
-            text-shadow: 0 0 10px #00ffff;
+        /* Menu Lateral */
+        .sidebar {
+            width: 85px;
+            background-color: #030006;
+            border-right: 1px solid #221133;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 15px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            color: #8c8c8c;
+            font-size: 11px;
+            transition: all 0.3s ease;
+        }
+
+        /* Item ativo */
+        .nav-item.active {
+            background-color: #8a2be2;
+            color: #fff;
+        }
+
+        .nav-item span:first-child {
+            font-size: 20px;
             margin-bottom: 5px;
-            text-transform: uppercase;
         }
 
-        .header-subtitle {
-            font-size: 16px;
-            color: #d8b4fe;
-            margin-bottom: 30px;
+        /* Conteúdo Principal */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Abas escondidas por padrão */
+        .tab-content {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Aba ativa visível */
+        .tab-content.active {
+            display: flex;
+        }
+
+        /* Cabeçalho superior */
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .header-title {
+            font-size: 18px;
             font-weight: bold;
-            text-shadow: 0 0 8px #8a2be2;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* Formulários e Inputs */
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
+        .header-badge {
+            background-color: #1a0a2a;
+            border: 1px solid #8a2be2;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            color: #d8b4fe;
         }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #a3e635;
-            font-size: 14px;
+        /* Alerta de Autorização Shizuku */
+        .shizuku-status {
+            background-color: rgba(0, 200, 80, 0.1);
+            border: 1px solid #00c853;
+            color: #00e676;
+            font-size: 11px;
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
             font-weight: 600;
         }
 
-        input[type="password"], select {
+        /* Cards de Configuração */
+        .card {
+            background-color: #090312;
+            border: 1px solid #25133a;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            color: #bd7eff;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .card-desc {
+            font-size: 11px;
+            color: #7b6f87;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        /* Controles de Slider */
+        .slider-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .slider {
+            -webkit-appearance: none;
             width: 100%;
-            padding: 12px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid #8a2be2;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 16px;
+            height: 6px;
+            border-radius: 3px;
+            background: #25133a;
             outline: none;
-            transition: 0.3s;
         }
 
-        input[type="password"]:focus, select:focus {
-            border-color: #00ffff;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #8a2be2;
+            cursor: pointer;
+            box-shadow: 0 0 8px #8a2be2;
         }
 
-        button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(90deg, #8a2be2, #00ffff);
-            border: none;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 16px;
+        /* Botões de Inicialização rápida */
+        .game-launchers {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-launch {
+            flex: 1;
+            background-color: #1a0a2a;
+            border: 1px solid #8a2be2;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s;
         }
 
-        button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        .btn-launch:hover {
+            background-color: #8a2be2;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
         }
 
-        /* Telas */
-        .screen {
-            display: none;
-        }
-
-        .active {
-            display: block;
-        }
-
-        /* Resultado da Sensi */
-        .result-box {
-            margin-top: 25px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 12px;
-            border-left: 4px solid #00ffff;
-            text-align: left;
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-item {
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-
-        .result-item span {
-            color: #00ffff;
+        .btn-action {
+            background-color: #8a2be2;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
             font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+            text-transform: uppercase;
         }
 
-        .error-msg {
-            color: #ff4444;
-            font-size: 14px;
-            margin-top: 10px;
-            display: none;
+        .btn-action:hover {
+            background-color: #731cca;
+        }
+
+        /* Interruptores / Alternadores */
+        .toggle-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #25133a;
+            transition: .3s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #00c853; /* Verde para segurança e ativação */
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(18px);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header-title">gustazzk</div>
-        <div class="header-subtitle">O rei das sensibilidade🚀</div>
-
-        <div id="login-screen" class="screen active">
-            <div class="input-group">
-                <label for="password">Digite a senha para acessar:</label>
-                <input type="password" id="password" placeholder="Sua senha aqui...">
-                <div id="error-message" class="error-msg">Senha incorreta! Tente novamente.</div>
+    <div class="menu-container">
+        <div class="sidebar">
+            <div class="nav-item active" onclick="switchTab('aim-tab', this)">
+                <span>🎯</span>
+                <span style="margin-top: 2px;">Aim</span>
             </div>
-            <button onclick="verificarSenha()">Entrar no Painel</button>
+            <div class="nav-item" onclick="switchTab('optimize-tab', this)">
+                <span>⚡</span>
+                <span>Optimize</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('inject-tab', this)">
+                <span>&lt;/&gt;</span>
+                <span>Inject</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('security-tab', this)">
+                <span>🛡️</span>
+                <span>Security</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('infos-tab', this)">
+                <span>ℹ️</span>
+                <span>Infos</span>
+            </div>
         </div>
 
-        <div id="main-screen" class="screen">
-            <div class="input-group">
-                <label for="tipo-sensi">Escolha o Tipo de Sensibilidade:</label>
-                <select id="tipo-sensi">
-                    <option value="alta">Alta (Foco em InstaPlayer)</option>
-                    <option value="media">Média (Equilibrada/Campeonato)</option>
-                    <option value="baixa">Baixa (Foco em % de Capa/Armas de um tiro)</option>
-                </select>
+        <div class="main-content">
+            
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="font-size: 13px; font-weight: bold; color: #bd7eff; letter-spacing: 1px;">GUSTAZZK SENSI</div>
+                <div class="shizuku-status">✔ Shizuku Autorizado (Permissão Concedida)</div>
             </div>
 
-            <div class="input-group">
-                <label for="com-dpi">Configuração de DPI:</label>
-                <select id="com-dpi">
-                    <option value="sim">Com DPI (Celular leve)</option>
-                    <option value="nao">Sem DPI (Padrão do Jogo)</option>
-                </select>
-            </div>
+            <div id="aim-tab" class="tab-content active">
+                <div class="header-content">
+                    <div class="header-title">🎯 Mira</div>
+                    <div class="header-badge">∞ Vitalício</div>
+                </div>
 
-            <button onclick="gerarSensibilidade()">Gerar Melhor Sensi 🔥</button>
+                <div class="card">
+                    <div class="toggle-container">
+                        <div>
+                            <div class="card-header" style="margin-bottom: 4px;">Auxílio de Mira</div>
+                            <div class="card-desc" style="margin-bottom: 0; padding-right: 10px;">
+                                Ativa a assistência de calibração para foco nos alvos.
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
 
-            <div id="result" class="result-box">
-                <div class="result-item">Geral: <span id="res-geral">0</span>/200</div>
-                <div class="result-item">Ponto Vermelho: <span id="res-red">0</span>/200</div>
-                <div class="result-item">Mira 2x: <span id="res-2x">0</span>/200</div>
-                <div class="result-item">Mira 4x: <span id="res-4x">0</span>/200</div>
-                <div class="result-item">AWM: <span id="res-awm">0</span>/200</div>
-                <div class="result-item" id="dpi-row">DPI recomendada: <span id="res-dpi">0</span></div>
-                <div class="result-item" style="color: #a3e635; margin-top: 10px; font-size: 13px; text-align: center;">
-                    ⚡ Sensi calibrada pelo Rei Gustazzk!
+                <div class="card">
+                    <div class="card-header">
+                        <span>Regular precisão: <span id="val-precisao">89%</span></span>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" min="0" max="100" value="89" oninput="document.getElementById('val-precisao').innerText = this.value + '%'">
+                    </div>
                 </div>
             </div>
+
+            <div id="optimize-tab" class="tab-content">
+                <div class="header-content">
+                    <div class="header-title">⚡ Optimize</div>
+                </div>
+
+                <div class="card">
+                    <div class="toggle-container">
+                        <div>
+                            <div class="card-header" style="margin-bottom: 4px;">FPS Máximo</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span>Mira suave: <span id="val-suave">75%</span></span>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" min="0" max="100" value="75" oninput="document.getElementById('val-suave').innerText = this.value + '%'">
+                    </div>
+                </div>
+            </div>
+
+            <div id="inject-tab" class="tab-content">
+                <div class="header-content">
+                    <div class="header-title">&lt;/&gt; Inject</div>
+                </div>
+
+                <div class="card">
+                    <div class="toggle-container">
+                        <div>
+                            <div class="card-header" style="margin-bottom: 4px;">Calibrar Mira</div>
+                            <div class="card-desc" style="margin-bottom: 0;">Ajusta a resposta do toque para alinhamento dos eixos de movimento.</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="toggle-container">
+                        <div>
+                            <div class="card-header" style="margin-bottom: 4px;">Mira Quase Perfeita</div>
+                            <div class="card-desc" style="margin-bottom: 0;">Otimiza os filtros de input para simular estabilização avançada.</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span>Sensibilidade Estendida: <span id="val-sensi">200x</span></span>
+                    </div>
+                    <div class="slider-container">
+                        <input type="range" class="slider" min="1" max="200" value="200" oninput="document.getElementById('val-sensi').innerText = this.value + 'x'">
+                    </div>
+                </div>
+            </div>
+
+            <div id="security-tab" class="tab-content">
+                <div class="header-content">
+                    <div class="header-title">🛡️ Security</div>
+                </div>
+
+                <div class="card">
+                    <div class="toggle-container">
+                        <div>
+                            <div class="card-header" style="margin-bottom: 4px;">Anti-Ban Security</div>
+                            <div class="card-desc" style="margin-bottom: 0;">Proteção ativa baseada em isolamento de arquivos temporários do sistema.</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="toggle-container">
+                        <div>
+                            <div class="card-header" style="margin-bottom: 4px;">Anti-Blacklist</div>
+                            <div class="card-desc" style="margin-bottom: 0;">Oculta modificações de densidade de tela do monitoramento local.</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="infos-tab" class="tab-content">
+                <div class="header-content">
+                    <div class="header-title">ℹ️ Infos</div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Versão do App</div>
+                    <div class="card-desc" style="margin-bottom: 0;">v2.4.0 - Desenvolvido para simulações de interface móvel.</div>
+                </div>
+            </div>
+
+            <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px;">
+                <div style="font-size: 11px; color: #7b6f87; font-weight: bold; text-transform: uppercase;">Abrir Jogo Direto:</div>
+                <div class="game-launchers">
+                    <button class="btn-launch" onclick="alert('Iniciando Free Fire Normal...')">FF Normal</button>
+                    <button class="btn-launch" onclick="alert('Iniciando Free Fire Max...')">FF Max</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script>
-        // Função para validar a senha
-        function verificarSenha() {
-            const senhaInput = document.getElementById('password').value;
-            const erroMsg = document.getElementById('error-message');
-            
-            if (senhaInput === 'gustazzk') {
-                document.getElementById('login-screen').classList.remove('active');
-                document.getElementById('main-screen').classList.add('active');
-            } else {
-                erroMsg.style.display = 'block';
-            }
-        }
+        function switchTab(tabId, element) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
 
-        // Função que gera números aleatórios
-        function gerarRandom(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
-        function gerarSensibilidade() {
-            const tipoSensi = document.getElementById('tipo-sensi').value;
-            const comDpi = document.getElementById('com-dpi').value;
-            
-            let geral, red, m2x, m4x, awm, dpi;
-
-            // Lógica ajustada para a escala de 0 a 200
-            if (tipoSensi === 'alta') {
-                geral = gerarRandom(180, 200);
-                red = gerarRandom(175, 198);
-                m2x = gerarRandom(180, 200);
-                m4x = gerarRandom(170, 195);
-            } else if (tipoSensi === 'media') {
-                geral = gerarRandom(140, 179);
-                red = gerarRandom(130, 174);
-                m2x = gerarRandom(140, 179);
-                m4x = gerarRandom(135, 169);
-            } else { // Baixa
-                geral = gerarRandom(80, 139);
-                red = gerarRandom(75, 129);
-                m2x = gerarRandom(80, 139);
-                m4x = gerarRandom(70, 134);
-            }
-
-            awm = gerarRandom(50, 120);
-
-            // Exibir os dados na tela
-            document.getElementById('res-geral').innerText = geral;
-            document.getElementById('res-red').innerText = red;
-            document.getElementById('res-2x').innerText = m2x;
-            document.getElementById('res-4x').innerText = m4x;
-            document.getElementById('res-awm').innerText = awm;
-
-            // Lógica da DPI
-            const dpiRow = document.getElementById('dpi-row');
-            if (comDpi === 'sim') {
-                if (tipoSensi === 'alta') dpi = gerarRandom(720, 960);
-                else if (tipoSensi === 'media') dpi = gerarRandom(550, 710);
-                else dpi = gerarRandom(420, 540);
-                
-                document.getElementById('res-dpi').innerText = dpi;
-                dpiRow.style.display = 'block';
-            } else {
-                dpiRow.style.display = 'none';
-            }
-
-            // Mostrar o box de resultado com animação
-            document.getElementById('result').style.display = 'block';
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
         }
     </script>
+
 </body>
 </html>
